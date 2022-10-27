@@ -70,7 +70,7 @@ files and set up the Avida-ED source files and libraries.
 
 In a browser, enter this URL:
 
-> 0.0.0.0:5800
+> localhost:5800
 
 That will display a new Firefox browser page that is running in your
 browser.
