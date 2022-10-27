@@ -1,42 +1,87 @@
 # AED-Docker #
 
-Simple project to serve Avida-ED-Eco via NGINX.
+## Avida-ED, Anti-Bit Rot Edition
 
-Eventually, we want to incorporate a fixed browser executable into this
-so that all software resides in a container project.
+## Introduction
+
+Avida-ED is a substantially large software project, and  one of the
+issues with continued use of a static software package as a web app
+is that the rest of the components may have changes in their
+composition: user browsers update, underlying libraries change
+interfaces, etc.
+
+In order to provide a means of running Avida-ED as a web app through at
+least the medium term (say, ten years or so), we are providing this
+project to encapsulate Avida-ED into a Docker container project.
+By doing so, we hope to preclude breakage due to ordinary causes
+like encountering an incompatible browser update. Because Docker is popular
+and programs running in Docker containers should continue to work as
+long as backward-compatility continues.
+
+The downside is that Docker containers are more complex to manage
+than native executables.
+
+## Prerequisites
+
+### Install Docker
+
+For Windows and Macos, the Docker Desktop is recommended. (Commercial users
+will need to obtain a license from Docker, though.)
+
+On Linux, Docker Community Edition should be installed by the user.
+
+
+## Installation
+
+### Manual Step-wise Instructions
+
+Clone the project from Github.
 
 
 
-## From the email describing the demo: ##
+
+### Python program guided installation
+
+TBD
+
+## Building
+
+### Prerequisites
+
+You will need Docker or Doccker Desktop installed.
+
+You will need the Git version control program installed on your machine.
+
+Then clone the 'aed-docker' repository.
+
+> git clone https://github.com/welsberr/aed-docker.git
+> cd aed-docker
+
+### Docker Compose step
+
+The two images get built and run using Docker Compose.
+
+> docker-compose up -d
+
+The first time this runs, it will take time to download necessary
+files and set up the Avida-ED source files and libraries.
+
+### Accessing Avida-ED
+
+In a browser, enter this URL:
+
+> 0.0.0.0:5800
+
+That will display a new Firefox browser page that is running in your
+browser.
+
+Within that page, enter this URL:
+
+> avidaed_server:80/Avida-ED-Eco/index.html
 
 
+That should bring up Avida-ED in the Firefox page.
 
-Build NGINX container:
-
-docker build .
-
-Run server:
-
-docker run -it --rm -d -p 8080:80 --name web  e1fbf99f9558
-
-(The container name is a default provided by Docker.)
-
-Invoking Docker Firefox:
-
-docker run -d     --name=firefox     -p 5800:5800     -v /docker/appdata/firefox:/config:rw     --shm-size 2g     jlesage/firefox
-
-## From a later email to Jimin Song: ##
-
-One way I've thought of to do development and test with the container setup would be to use a bind volume with the NGINX container in dev. That way, the Avida-ED source files can be in the local filesystem, but be served by the NGINX container. This would mean that dev and production would have slightly different Dockerfiles, but it is about the easiest approach I am thinking of to handle this.
-
-If you have another approach in mind, please let me know.
-
-
-Summarizing what I recall from yesterday's meeting:
-
-Highest priority is to produce a Docker-based Avida-ED system that serves Avida-ED 4 and includes a fixed-build browser to run the application. Documentation sufficient to allow a casual user to set up Docker, run the Docker image, and launch the application will be needed. This will serve to fulfill the goals of the supplemental grant, and needs to be done by mid-October.
-
-Beyond that, we will be looking for user experience improvements to reduce the technical burden for use. This may include further work on Docker containers, but also may involve other approaches to be identified. We discussed the possibility of use of Cosmopolitan/RedBean in this way.
 
 
 
