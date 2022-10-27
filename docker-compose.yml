@@ -1,26 +1,29 @@
 version: '3.8'
 services:
-  web:
+  avidaed_server:
     build: .
     ports:
       - 8081:80
-    container_name: web
+    container_name: avidaed_server
     volumes:
       - user-web:/usr/share/nginx/html
-  firefox:
+  avidaed_browser:
     image: jlesage/firefox
     ports:
         - 5800:5800
     volumes: 
         - my-vol:/data/db
+        - my-config:/config:rw
     depends_on: 
-            - web
+            - avidaed_server
     
-    container_name: firefox        
+    container_name: avidaed_browser        
     shm_size: "2gb"
         
 volumes:
      my-vol:
+        driver: local
+     my-config:
         driver: local
      user-web:
         driver: local
