@@ -6,24 +6,26 @@ services:
       - 8081:80
     container_name: avidaed_server
     volumes:
-      - user-web:/usr/share/nginx/html
+      - avidaed_server_web:/usr/share/nginx/html
   avidaed_browser:
     image: jlesage/firefox
     ports:
         - 5800:5800
     volumes: 
-        - my-vol:/data/db
-        - my-config:/config:rw
+        - avidaed_browser_db:/data/db
+        - avidaed_browser_config:/config:rw
     depends_on: 
             - avidaed_server
     
     container_name: avidaed_browser        
     shm_size: "2gb"
+    environment:
+    - FF_OPEN_URL=http://avidaed_server:80/Avida-ED-Eco/index.html
         
 volumes:
-     my-vol:
+     avidaed_browser_db:
         driver: local
-     my-config:
+     avidaed_browser_config:
         driver: local
-     user-web:
+     avidaed_server_web:
         driver: local
